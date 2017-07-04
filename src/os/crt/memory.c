@@ -109,7 +109,7 @@ void* (memmove)(void* dest, const void* src, size_t count) {
 __attribute__((__optimize__("-fno-tree-loop-distribute-patterns")))
 void* (memset)(void *dest, int ch, size_t count) {
     const unsigned char value = (unsigned char)(unsigned int)ch;
-    unsigned char* destination = (unsigned char*)destination;
+    unsigned char* destination = (unsigned char*)dest;
 
     for (; count != 0; --count) {
         (*destination++) = value;

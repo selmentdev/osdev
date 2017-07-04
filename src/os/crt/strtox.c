@@ -266,7 +266,7 @@ static errno_t __libc_string_to_int32(const char* restrict str, char** restrict 
 }
 
 
-static __libc_string_to_uint64(const char* restrict str, char** restrict endstr, int base, uint64_t* restrict result) {
+static errno_t __libc_string_to_uint64(const char* restrict str, char** restrict endstr, int base, uint64_t* restrict result) {
     //
     // Check base param values.
     //
@@ -542,10 +542,10 @@ long int (strtol)(const char* restrict str, char** restrict endstr, int base) {
 
 #if __SIZEOF_LONG__ == __SIZEOF_LONG_LONG__
     int64_t result = 0;
-    errno = __libc_string_to_int64(str, &end, base, &result);
+    __libc_string_to_int64(str, &end, base, &result);
 #else
     int32_t result = 0;
-    errno = __libc_string_to_int32(str, &end, base, &result);
+    __libc_string_to_int32(str, &end, base, &result);
 #endif
 
     if (endstr != NULL) {
@@ -558,7 +558,8 @@ long int (strtol)(const char* restrict str, char** restrict endstr, int base) {
 long long int (strtoll)(const char* restrict str, char** restrict endstr, int base) {
     char* end = NULL;
     int64_t result = 0;
-    errno = __libc_string_to_int64(str, &end, base, &result);
+
+     __libc_string_to_int64(str, &end, base, &result);
 
     if (endstr != NULL) {
         (*endstr) = end;
@@ -572,10 +573,10 @@ unsigned long int (strtoul)(const char* restrict str, char** restrict endstr, in
 
 #if __SIZEOF_LONG__ == __SIZEOF_LONG_LONG__
     uint64_t result = 0;
-    errno = __libc_string_to_uint64(str, &end, base, &result);
+    __libc_string_to_uint64(str, &end, base, &result);
 #else
     uint32_t result = 0;
-    errno = __libc_string_to_uint32(str, &end, base, &result);
+    __libc_string_to_uint32(str, &end, base, &result);
 #endif
 
     if (endstr != NULL) {
@@ -588,7 +589,8 @@ unsigned long int (strtoul)(const char* restrict str, char** restrict endstr, in
 unsigned long long int (strtoull)(const char* restrict str, char** restrict endstr, int base) {
     char* end = NULL;
     uint64_t result = 0;
-    errno = __libc_string_to_uint64(str, &end, base, &result);
+
+    __libc_string_to_uint64(str, &end, base, &result);
 
     if (endstr != NULL) {
         (*endstr) = end;

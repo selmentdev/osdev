@@ -1,5 +1,7 @@
 #include "../crt.h"
 
+extern const char __libc_ctype_digits_lowercase[];
+extern const char __libc_ctype_digits_uppercase[];
 
 #define SCAN_FLAGS_NONE          (0)
 #define SCAN_FLAGS_SUPPRESSED    (1 << 0)

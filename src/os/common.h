@@ -1,8 +1,6 @@
 #pragma once
 #define UNUSED(a) (void)(a)
 
-typedef unsigned long long size_t;
-
 #ifdef __cplusplus
 #define STATIC_ASSERT(_Expression)      static_assert(_Expression, #_Expression)
 #else

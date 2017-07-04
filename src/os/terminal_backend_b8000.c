@@ -24,6 +24,7 @@ static struct B8000_ContextStruct {
 static void B8000_ScrollLine(TerminalBackend *tb);
 
 static void B8000_SetColor(TerminalBackend *tb, unsigned char fgColor, unsigned char bgColor, bool blink) {
+  UNUSED(tb);
   B8000_Context.fgColor = fgColor;
   B8000_Context.bgColor = bgColor;
   B8000_Context.blink = blink;

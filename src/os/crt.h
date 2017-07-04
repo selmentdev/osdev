@@ -1,5 +1,9 @@
 #pragma once
 #include "common.h"
+#include <stdarg.h>
+#include <stddef.h>
+#include <stdint.h>
+#include <limits.h>
 
 // <ctype.h>
 
@@ -16,6 +20,19 @@
 #define CTYPE_XDIGIT        0x0200
 #define CTYPE_CBYTE         0x0400
 #define CTYPE_LEADBYTE      0x8000
+
+#define CT_UPPER            CTYPE_UPPER
+#define CT_LOWER            CTYPE_LOWER
+#define CT_DIGIT            CTYPE_DIGIT
+#define CT_SPACE            CTYPE_SPACE
+#define CT_PUNCT            CTYPE_PUNCT
+#define CT_CNTRL            CTYPE_CNTRL
+#define CT_BLANK            CTYPE_BLANK
+#define CT_XDIGIT           CTYPE_XDIGIT
+#define CT_GRAPH            CTYPE_GRAPH
+#define CT_LEADBYTE         CTYPE_LEADBYTE
+#define CT_CBYTE            CTYPE_CBYTE
+#define CT_ALPHA            (CTYPE_ALPHA | CTYPE_UPPER | CTYPE_LOWER)
 
 extern int isalnum(int c);
 extern int isalpha(int c);
@@ -113,7 +130,7 @@ extern char* strrchr(const char* str, int ch);
 extern size_t strspn(const char* dest, const char* src);
 extern char* strstr(const char* str, const char* substr);
 extern size_t strxfrm(char* restrict dest, const char* restrict src, size_t count);
-
+extern size_t strnlen_s(const char* str, size_t max_count);
 
 // <stdlib.h>
 
@@ -125,3 +142,10 @@ extern long int (strtol)(const char* restrict str, char** restrict endstr, int b
 extern long long int (strtoll)(const char* restrict str, char** restrict endstr, int base);
 extern unsigned long int (strtoul)(const char* restrict str, char** restrict endstr, int base);
 extern unsigned long long int (strtoull)(const char* restrict str, char** restrict endstr, int base);
+
+// Additional LIBC macros.
+#define __libc_flag_set(__Value, __Mask)                    ((__Value) | (__Mask))
+#define __libc_flag_unset(__Value, __Mask)                  ((__Value) & (~(__Mask)))
+#define __libc_flag_has(__Value, __Mask)                    (((__Value) & (__Mask)) == (__Mask))
+#define __libc_flag_any(__Value, __Mask)                    (((__Value) & (__Mask)) != 0)
+#define __libc_flag_none(__Value, __Mask)                   (((__Value) & (__Mask)) == 0)

@@ -1,4 +1,6 @@
 #include "../crt.h"
+#include <stdint.h>
+#include <stddef.h>
 
 const char __libc_ctype_digits_lowercase[] = "0123456789abcdefghijklmnopqrstuvwxyz";
 const char __libc_ctype_digits_uppercase[] = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";

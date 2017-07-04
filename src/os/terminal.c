@@ -1,4 +1,5 @@
 #include <stdarg.h>
+#include <stddef.h>
 #include "common.h"
 #include "terminal.h"
 

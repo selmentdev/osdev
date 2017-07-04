@@ -1,5 +1,8 @@
 #include "../crt.h"
 
+extern const char __libc_ctype_digits_lowercase[];
+extern const char __libc_ctype_digits_uppercase[];
+
 #define FORMAT_FLAGS_NONE       (0)
 #define FORMAT_FLAGS_MINUS      (1 << 0)
 #define FORMAT_FLAGS_PLUS       (1 << 1)
@@ -40,8 +43,8 @@ typedef struct __libc_format_status_t {
 } __libc_format_status_t;
 
 static int __libc_putc_unlocked(int character, FILE* stream) {
-    __libc_unused__(character);
-    __libc_unused__(stream);
+    (void)character;
+    (void)stream;
     return 0;
     //return fputc(character, stream);
 }

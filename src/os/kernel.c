@@ -2,6 +2,7 @@
 #include "idt.h"
 #include "terminal.h"
 #include "terminal_backend_b8000.h"
+#include "crt.h"
 
 int div(int a, int b) {
   return a/b;
@@ -14,6 +15,7 @@ void _start(void* kernel_location) {
   TerminalBackend *con = TerminalBackendB8000();
 
   T_ClearScreen(con);
+  T_SetColor(con, COLOR_WHITE, 0, 0);
   T_PutText(con, "aaaaaaaaaaaaaaaaaaaaaaaaaaaaa\r\t\tXXXX\n");
   T_Printf(con, "%p %x %i %s %c %u\n",
       con, 0x41424344, -1234, "alamakota", 'X', 1234567890123LL);
@@ -24,6 +26,11 @@ void _start(void* kernel_location) {
   //  textvram[i * 2] = "0123456789ABCDEF"[(addr >> 60) & 0xf];
   //  addr <<= 4;
   //}
+
+  char buffer[128];
+  snprintf(buffer, sizeof(buffer), "Hello from %p", _start);
+  T_Printf(con, "%s", buffer);
+  for (;;) { ; }
 
   int a = 0, b = 0;
   __asm__ volatile("div %2\n"

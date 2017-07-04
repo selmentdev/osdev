@@ -1,5 +1,7 @@
 #include "../crt.h"
 
+STATIC_ASSERT(CHAR_BIT == 8);
+
 __attribute__((__optimize__("-fno-tree-loop-distribute-patterns")))
 char* (strcat)(char* restrict dest, const char* restrict src) {
     char* destination = dest;
@@ -26,7 +28,7 @@ char* (strchr)(const char* str, int ch) {
     }
 
     if (*str == value) {
-        return str;
+        return (char*)str;
     }
 
     return NULL;
@@ -67,9 +69,6 @@ __attribute__((__optimize__("-fno-tree-loop-distribute-patterns")))
 size_t (strcspn)(const char* dest, const char* src) {
     const unsigned char* str = (const unsigned char*)dest;
     const unsigned char* ctrl = (const unsigned char*)src;
-
-    // Check for other archs.
-    STATIC_ASSERT(CHAR_BITS == 8);
 
     unsigned char map[32];
 
@@ -166,9 +165,6 @@ char* (strpbrk)(const char* dest, const char* breakset) {
     const unsigned char* str = (const unsigned char*)dest;
     const unsigned char* ctrl = (const unsigned char*)breakset;
 
-    // Check for other archs.
-    STATIC_ASSERT(CHAR_BITS == 8);
-
     unsigned char map[32];
 
     for (size_t i = 0; i < 32; ++i) {
@@ -215,9 +211,6 @@ __attribute__((__optimize__("-fno-tree-loop-distribute-patterns")))
 size_t (strspn)(const char* dest, const char* src) {
     const unsigned char* str = (const unsigned char*)dest;
     const unsigned char* ctrl = (const unsigned char*)src;
-
-    // Check for other archs.
-    STATIC_ASSERT(CHAR_BITS == 8);
 
     unsigned char map[32];
 
@@ -276,4 +269,23 @@ size_t (strxfrm)(char* restrict dest, const char* restrict src, size_t count) {
     }
 
     return length;
+}
+
+__attribute__((__optimize__("-fno-tree-loop-distribute-patterns")))
+size_t (strnlen_s)(const char* str, size_t max_count)
+{
+    if (str != NULL)
+    {
+        const char* last = str + max_count;
+        const char* it = str;
+
+        while (it != last && *it != '\0')
+        {
+            ++it;
+        }
+
+        return (size_t)(it - str);
+    }
+
+    return 0;
 }
