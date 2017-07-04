@@ -31,6 +31,11 @@ def build():
 
     objfiles = []
 
+    # LIBC files
+    for fname in glob("../src/os/crt/*.c"):
+        cmds_to_run.append("gcc %s %s" % (fname, cc_flags))
+        objfiles.append("%s.o" % os.path.basename(os.path.splitext(fname)[0]))
+
     for fname in glob("../src/os/*.c"):
         cmds_to_run.append("gcc %s %s" % (fname, cc_flags))
         objfiles.append("%s.o" % os.path.basename(os.path.splitext(fname)[0]))
