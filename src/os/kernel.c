@@ -30,7 +30,6 @@ void _start(void* kernel_location) {
   char buffer[128];
   snprintf(buffer, sizeof(buffer), "Hello from %p", _start);
   T_Printf(con, "%s", buffer);
-  for (;;) { ; }
 
   int a = 0, b = 0;
   __asm__ volatile("div %2\n"
@@ -39,5 +38,5 @@ void _start(void* kernel_location) {
 
   T_PutText(con, "It came back!");
 
-  for(;;);
+  HAL_PauseKernel();
 }

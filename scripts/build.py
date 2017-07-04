@@ -26,7 +26,7 @@ def build():
     """ Build disk image with OS """
     cmds_to_run = []
 
-    cc_flags = "-std=c99 -nostdlib -c -O0 -Wall -Wextra -masm=intel -ggdb"
+    cc_flags = "-std=c99 -nostdlib -c -O0 -Wall -Wextra -masm=intel -ggdb -fstack-protector-strong"
     ld_flags = "-std=c99 -nostdlib -o kernel64 -O0 -Wall -Wextra -masm=intel -ggdb"
 
     objfiles = []
