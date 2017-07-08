@@ -2,9 +2,10 @@
 #include "common.h"
 #include "terminal.h"
 #include "terminal_backend_b8000.h"
+#include "hal.h"
 
 void GuruPanicOfDeath(const char *reason, TrapFrame *frame) {
-  TerminalBackend *con = TerminalBackendB8000();
+  TerminalBackend *con = Console;
   T_ClearScreen(con);
 
   T_SetColor(con, COLOR_WHITE, 0, 0);

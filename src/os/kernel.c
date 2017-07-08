@@ -2,7 +2,10 @@
 #include "idt.h"
 #include "terminal.h"
 #include "terminal_backend_b8000.h"
+#include "terminal_backend_uart16550.h"
 #include "crt.h"
+#include "hal.h"
+
 
 int div(int a, int b) {
   return a/b;
@@ -12,8 +15,10 @@ void _start(void* kernel_location) {
   UNUSED(kernel_location);
   SetIDTR();
 
-  TerminalBackend *con = TerminalBackendB8000();
+  Console = TerminalBackendUART16550();
+  TerminalBackend *con = Console;
 
+  T_Initialize(con);
   T_ClearScreen(con);
   T_SetColor(con, COLOR_WHITE, 0, 0);
   T_PutText(con, "aaaaaaaaaaaaaaaaaaaaaaaaaaaaa\r\t\tXXXX\n");

@@ -94,6 +94,10 @@ static void B8000_PutCharacter(TerminalBackend *tb, uint32_t ch) {
   B8000_SetCursorPosition(tb, x, y);
 }
 
+static void B8000_Initialize(TerminalBackend *tb) {
+  UNUSED(tb);
+}
+
 static void B8000_GetCursorPosition(
     TerminalBackend *tb, uint16_t *x, uint16_t *y) {
   UNUSED(tb);
@@ -121,6 +125,7 @@ static void B8000_ScrollLine(TerminalBackend *tb) {
 }
 
 static const TerminalBackend B8000_Functions = {
+    .func_initialize = B8000_Initialize,
     .func_set_cursor_position = B8000_SetCursorPosition,
     .func_get_cursor_position = B8000_GetCursorPosition,
     .func_clear_screen = B8000_ClearScreen,

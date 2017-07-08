@@ -3,6 +3,12 @@
 #include "common.h"
 #include "terminal.h"
 
+TerminalBackend* Console = NULL;
+
+void T_Initialize(TerminalBackend *tb) {
+  tb->func_initialize(tb);
+}
+
 void T_SetCursorPosition(
     TerminalBackend *tb, uint16_t x, uint16_t y) {
   tb->func_set_cursor_position(tb, x, y);
